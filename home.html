@@ -19,7 +19,7 @@
             var apiKey = 'C82411981FA3ED92A9744F9FD4F30A8F'; // Replace this with your Steam API key
             
             $.ajax({
-                url: 'https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=' + apiKey + '&steamids=' + steamId,
+                url: 'https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + apiKey + '&steamids=' + steamId,
                 success: function(data) {
                     var player = data.response.players[0];
                     var status = player.personastate;
