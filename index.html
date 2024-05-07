@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFK Cycle Control</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jake's Website</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #000000; /* black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .loader {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 5px solid #ffffff; /* white border */
+    border-top: 5px solid #808080; /* grey border */
+    animation: spin 1s linear infinite; /* spinning animation */
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
 </head>
 <body>
-    <button id="afkOnBtn">AFK Cycle On</button>
-    <button id="afkOffBtn">AFK Cycle Off</button>
-
-    <script>
-        document.getElementById('afkOnBtn').addEventListener('click', function() {
-            sendMessage('AFK Cycle Enabled at ' + getTime());
-        });
-
-        document.getElementById('afkOffBtn').addEventListener('click', function() {
-            sendMessage('AFK Cycle Disabled at ' + getTime());
-        });
-
-        function sendMessage(message) {
-            fetch('https://discord.com/api/webhooks/1231221685219364895/20ijMqaIKKjbbhmDB3jjOohgc4DJ82cOAyJBRtvCVJIKn3GOpV71p0SeFrBLKG9rocPW', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ content: message })
-            })
-            .then(response => console.log('Message sent:', response))
-            .catch(error => console.error('Error sending message:', error));
-        }
-
-        function getTime() {
-            const now = new Date();
-            return now.toLocaleString();
-        }
-    </script>
+  <div class="loader"></div>
 </body>
 </html>
