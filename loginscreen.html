@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #000000; /* black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #ffffff; /* white text */
+    font-family: Arial, sans-serif;
+  }
+
+  .login-container {
+    background-color: #1c1c1c; /* dark grey background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* slight shadow effect */
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #333333; /* dark grey input background */
+    color: #ffffff; /* white text */
+    outline: none;
+  }
+
+  input[type="submit"] {
+    cursor: pointer;
+    background-color: #4CAF50; /* green button */
+    transition: background-color 0.3s;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #45a049; /* darker green on hover */
+  }
+</style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm" onsubmit="return loginUser()">
+      <label for="username">Username:</label><br>
+      <input type="text" id="username" name="username" required><br>
+      <label for="password">Password:</label><br>
+      <input type="password" id="password" name="password" required><br><br>
+      <input type="submit" value="Login">
+    </form>
+  </div>
+
+  <script>
+    function loginUser() {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      // Check if the username and password match any of the predefined accounts
+      if ((username === "User1" || username === "User2" || username === "User3" || username === "User4") && password === "UserPassword1234") {
+        // Redirect to homescreen.html upon successful login
+        window.location.href = "homescreen.html";
+
+        // Send message to Discord webhook
+        var time = new Date().toLocaleString();
+        var message = "Login: " + username + " logged in to the website at " + time;
+
+        // Replace the webhook URL with your actual Discord webhook URL
+        var webhookURL = "https://discord.com/api/webhooks/1231221685219364895/20ijMqaIKKjbbhmDB3jjOohgc4DJ82cOAyJBRtvCVJIKn3GOpV71p0SeFrBLKG9rocPW";
+
+        // Send POST request to the webhook
+        fetch(webhookURL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ content: message }),
+        })
+        .then(response => console.log('Message sent to Discord'))
+        .catch(error => console.error('Error sending message to Discord:', error));
+
+        return false; // Prevent form submission
+      } else {
+        alert("Invalid username or password. Please try again.");
+        return false; // Prevent form submission
+      }
+    }
+  </script>
+</body>
+</html>
